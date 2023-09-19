@@ -1,0 +1,45 @@
+body{
+  height:540px;
+  background:linear-gradient(#EBEAEA,#E4E3E3,#BCBBBB);
+}
+h1 {
+  text-align:center;
+  font-family:Microsoft JhengHei;
+}
+input{
+  display:inline-block;
+  
+  border:solid 1px black;
+  border-radius: 5px;
+  
+  padding:10px;
+  padding-left:20px;
+  padding-right:20px;
+  
+  font-family:Microsoft JhengHei;
+  font-size:160%;
+  
+
+  
+  color:white;
+  background-color:#8FAADC;
+}
+input:hover{
+  color:#8FAADC;
+  background-color:#fff;
+  border:2px #8FAADC solid;
+}
+.submit{
+  font-family:Microsoft JhengHei;
+  font-size:100%;
+  
+
+  
+  color:white;
+  background-color:#8497B0;
+}
+.submit:hover{
+  color:#8497B0;
+  background-color:white;
+  border:2px #8497B0 solid;
+}

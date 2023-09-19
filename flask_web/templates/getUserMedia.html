@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      div.parent_block{
+        display: flex;
+        width: 1100px;
+      }
+      section.video_sec, section.canvas_sec{
+        max-width: 100%;
+      }
+      section.video_sec{
+        margin-right: 20px;
+      }
+      div.btn_parent{
+        margin-bottom: 10px;
+      }
+      #my_canvas{
+        border: 1px solid blue;
+      }
+      #my_video, #my_canvas{
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <h1>video 標籤顯示 webcam 畫面；然後拍照顯示於 canvas 標籤上。</h1>
+    <div class="parent_block">
+      <section class="video_sec">
+        <div class="btn_parent">
+          <button type="button" id="open_webcam">開啟 webcam</button>
+          <button type="button" id="close_webcam">關閉 webcam</button>
+        </div>
+        
+        <video id="my_video" poster="https://alldata.sgp1.digitaloceanspaces.com/images%2Fwebcam_hint.png" playsinline autoplay muted></video>
+      </section>
+
+      <section class="canvas_sec">
+        <div class="btn_parent">
+          <button type="button" id="my_button">拍照</button>
+        </div>
+        
+        <canvas id="my_canvas"></canvas>
+      </section>
+    </div>
+    
+
+    
+    
+    <script>
+      "use strict";
+
+      const video_el = document.getElementById("my_video");
+      const canvas_el = document.getElementById("my_canvas");
+      var stream_obj; // 預計用來存放 串流相關的物件(MediaStream)
+
+      // 開啟 webcam
+      const open_webcam_el = document.getElementById("open_webcam");
+      open_webcam_el.addEventListener("click", function(){
+        
+        // 開啟視訊鏡頭，瀏覽器會跳詢問視窗
+        navigator.mediaDevices.getUserMedia({video: true}).then(function(stream){
+          stream_obj = stream;         // 將串流物件放在 stream_obj 全域變數，方便後面關閉 webcam 時會用到
+          video_el.srcObject = stream; // video 標籤顯示 webcam 畫面
+        }).catch(function(error){      // 若無法取得畫面，執行 catch
+          console.log('navigator.MediaDevices.getUserMedia Error: ', error.message, error.name);
+        });
+
+      });
+
+      // 關閉 webcam
+      const close_webcam_el = document.getElementById("close_webcam");
+      close_webcam_el.addEventListener("click", function(){
+        // console.log(stream.getTracks());
+        // 將所有的 MediaStreamTrack 都關閉
+        stream_obj.getTracks().forEach(function(track) {
+          track.stop();
+        });
+
+        stream_obj = undefined;    // 回到該變數原來預設(即 undefined)
+        video_el.srcObject = null; // 將 video 標籤上的 srcObject 清空
+      });
+
+
+      // 拍照
+      const button_el = document.getElementById("my_button");
+      button_el.addEventListener("click", function(){
+        // 將 video 標籤的影片寬高，顯示於 canvas 標籤上
+        canvas_el.width = video_el.videoWidth;
+        canvas_el.height = video_el.videoHeight;
+        //console.log(video_el.videoWidth);
+        //console.log(video_el.videoHeight);
+        
+        // drawImage 說明文件： https://www.w3schools.com/tags/canvas_drawimage.asp
+        canvas_el.getContext('2d').drawImage(video_el, 0, 0, canvas_el.width, canvas_el.height);
+      });
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+﻿<?php
+session_start();
+?>
+
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="PSPad editor, www.pspad.com">
+    <title>學生註冊</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='StudentR.css') }}">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+    <style rel="stylesheet">
+        .error {
+            color: #e88594;
+            margin-left: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="sitebody">
+        <h1>課堂專注力即時回饋系統</h1>
+
+        <form action="/register" method="post">
+
+            <script>
+  $(function(){
+    $('#form').validate({
+    onkeyup: function(element, event) {
+      //去除左側空白
+      var value = this.elementValue(element).replace(/^\s+/g, "");
+      $(element).val(value);
+    },
+    rules: {
+      id: {
+        required: true,
+        number: true,
+        minlength: 9,
+        maxlength: 9
+      },
+      name: {
+        required: true,
+        number: false
+      }
+    },
+    messages: {
+      id: {
+        required:'必填',
+        number:'學號必須為數字',
+        minlength:'學號不得少於9碼',
+        maxlength:'學號不得多於9碼'
+      },
+      name: {
+        required:'必填',
+        number: '姓名不得為數字'
+      }
+      },
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
+});
+            </script>
+
+
+            <div class="block">
+                <center>
+                    <h2>學生註冊</h2>
+
+                    <input type="text" id="id" name="id" placeholder="學號" class="enter"><br><br>
+                    <input type="text" id="name" name="name" placeholder="姓名" class="enter"><br><br>
+                    <input type="password" id="password" name="password" placeholder="密碼" class="enter">
+                </center>
+                <a href="/">
+                    <input type="button" value="回首頁" class="hp">
+                </a>
+                <input type="submit" value="註冊" class="li">
+            </div>
+</body>
+{% if error_msg %}
+<div class="error">{{ error_msg }}</div>
+        {% endif %}
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <link rel=stylesheet type=text/css href="{{ url_for('static',filename='TeacherLogin.css') }}">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="generator" content="PSPad editor, www.pspad.com">
+    <title>課堂專注力即時回饋系統</title>
+</head>
+<body>
+    <center><h1>課堂專注力即時回饋系統</h1></center>
+    <form action="/teacherselect" method="post">
+        <div class="block">
+            <center>
+                <h2>教師登入</h2>
+                <input type="text" name="tid" placeholder="帳號" class="enter"><br><br><br>
+                <input type="password" name="tpassword" placeholder="密碼" class="enter">
+            </center>
+            <a href="/">
+                <input type="button" value="回首頁" class="hp">
+            </a>
+            <input type="submit" value="登入" class="li">
+        </div>
+    </form>
+</body>
+{% if error_msg %}
+<div class="error">{{ error_msg }}</div>
+        {% endif %}
+</html>
