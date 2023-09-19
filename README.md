@@ -22,11 +22,11 @@ epochs = 50
 | train accucary | valid accucary | test accucary |
 |:--------------:|:--------------:|:-------------:|
 |     1. 000     |      1.000     |     0.9333    |
-
+![image](https://github.com/shiayongshen/Use_ResNet50_to_detect_student_status_in_real_time/blob/main/pic/val_acc.png)
 | train loss | valid loss | test loss |
 |:----------:|:----------:|:---------:|
 |   0.0186   |   0.0919   |  0.1995   |
-
+![image](https://github.com/shiayongshen/Use_ResNet50_to_detect_student_status_in_real_time/blob/main/pic/val_loss.png)
 
 
 |         | precision | recall | f1-score |
@@ -35,6 +35,7 @@ epochs = 50
 | happy   |   0.83    |  1.00  |   0.91   |
 | normal  |   1.00    |  0.91  |   0.95   |
 | sleepy  |   0.90    |  0.90  |   0.90   |
+![image](https://github.com/shiayongshen/Use_ResNet50_to_detect_student_status_in_real_time/blob/main/pic/confusion_matrix.png)
 
 ## 如何使用
 進入`flask_web`中，並於終端執行：
